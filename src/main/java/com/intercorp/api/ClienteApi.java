@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -35,5 +36,12 @@ public class ClienteApi {
 	public List<Cliente> getClient() throws Exception {
 		ClienteService clienteNegocio = new ClienteService();
 		return clienteNegocio.listar();
+	}
+	
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String getTest(@RequestParam(value = "name", defaultValue = "julio") String name_test) throws Exception {
+		String template = "Hello, %s!";
+		return String.format(template, name_test);
 	}
 }

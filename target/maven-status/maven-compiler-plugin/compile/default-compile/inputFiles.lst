@@ -1,0 +1,9 @@
+/home/julio/Documents/Repositories/test-intercorp/src/main/java/com/intercorp/dao/DAOClienteImpl.java
+/home/julio/Documents/Repositories/test-intercorp/src/main/java/com/intercorp/interfaces/DAOCliente.java
+/home/julio/Documents/Repositories/test-intercorp/src/main/java/com/intercorp/config/DozerMapper.java
+/home/julio/Documents/Repositories/test-intercorp/src/main/java/com/intercorp/api/ClienteRequest.java
+/home/julio/Documents/Repositories/test-intercorp/src/main/java/com/intercorp/dto/Cliente.java
+/home/julio/Documents/Repositories/test-intercorp/src/main/java/com/intercorp/TestIntercorpApplication.java
+/home/julio/Documents/Repositories/test-intercorp/src/main/java/com/intercorp/service/ClienteService.java
+/home/julio/Documents/Repositories/test-intercorp/src/main/java/com/intercorp/config/SwaggerConfig.java
+/home/julio/Documents/Repositories/test-intercorp/src/main/java/com/intercorp/api/ClienteApi.java

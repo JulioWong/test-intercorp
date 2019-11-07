@@ -1,0 +1,9 @@
+com/intercorp/interfaces/DAOCliente.class
+com/intercorp/config/DozerMapper.class
+com/intercorp/service/ClienteService.class
+com/intercorp/api/ClienteApi.class
+com/intercorp/api/ClienteRequest.class
+com/intercorp/config/SwaggerConfig.class
+com/intercorp/dto/Cliente.class
+com/intercorp/dao/DAOClienteImpl.class
+com/intercorp/TestIntercorpApplication.class
