@@ -12,7 +12,7 @@ import com.intercorp.interfaces.DAOCliente;
 public class DAOClienteImpl implements DAOCliente {
 
 	@Override
-	public void registrar(Cliente client) throws Exception {
+	public Cliente registrar(Cliente client) throws Exception {
 		AmazonDynamoDB clientbuild = AmazonDynamoDBClientBuilder.standard().build();
 		DynamoDBMapper mapper = new DynamoDBMapper(clientbuild);
 		
@@ -24,6 +24,7 @@ public class DAOClienteImpl implements DAOCliente {
 		newClient.setEdad(client.getEdad());
 		newClient.setFechaNacimiento(client.getFechaNacimiento());
 		mapper.save(newClient);
+		return newClient;
 	}
 
 	@Override

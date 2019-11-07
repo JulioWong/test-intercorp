@@ -1,13 +1,15 @@
 package com.intercorp.api;
 
-import com.intercorp.dao.DAOClienteImpl;
+import com.intercorp.service.ClienteService;
 import com.intercorp.dto.Cliente;
 
-import java.util.HashMap;
+// import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+// import java.util.Map;
 import java.util.UUID;
 
+import org.dozer.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,21 +22,24 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 
 import io.swagger.annotations.Api;
 
-
-
-
 @RestController
 @Api(value="Employee Management System", description="Operations pertaining to employee in Employee Management System")
 public class ClienteApi {
+	
+	// Inyecta mapper de Dozer
+	@Autowired
+	Mapper mapper;
 
 	@RequestMapping(value="/cliente", method=RequestMethod.POST)
-	public String updateOrSave(@RequestBody Cliente cRequest) throws Exception{  
-		// Invoca l[ogica de negocio
-		DAOClienteImpl insertClient = new DAOClienteImpl();
-		insertClient.registrar(cRequest);
-	    
-	    return "Bien";
+	public Cliente createClient(@RequestBody ClienteRequest clienteRequest) throws Exception{
+		// Mapeo request dto ==> entity
+		Cliente client = mapper.map(clienteRequest, Cliente.class);
+		
+		// Invoca logica de negocio
+		ClienteService insertClient = new ClienteService();
+		return insertClient.createClient(client);
 	}
+	
 	
 	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
 	public List<Cliente> getClient() {
@@ -51,7 +56,6 @@ public class ClienteApi {
 		item.setFechaNacimiento("1991-02-01T05:00:00Z");
 		mapper.save(item);
 		
-		       
 		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
 
 		List<Cliente> clients =  mapper.scan(Cliente.class, scanExpression);
