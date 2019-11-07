@@ -2,23 +2,14 @@ package com.intercorp.api;
 
 import com.intercorp.service.ClienteService;
 import com.intercorp.dto.Cliente;
-
-// import java.util.HashMap;
 import java.util.List;
-// import java.util.Map;
-import java.util.UUID;
-
+import javax.validation.Valid;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 
 import io.swagger.annotations.Api;
 
@@ -30,42 +21,19 @@ public class ClienteApi {
 	@Autowired
 	Mapper mapper;
 
-	@RequestMapping(value="/cliente", method=RequestMethod.POST)
-	public Cliente createClient(@RequestBody ClienteRequest clienteRequest) throws Exception{
+	@RequestMapping(value="/creacliente", method=RequestMethod.POST)
+	public Cliente crearCliente(@RequestBody @Valid ClienteRequest clienteRequest) throws Exception{
 		// Mapeo request dto ==> entity
-		Cliente client = mapper.map(clienteRequest, Cliente.class);
+		Cliente cliente = mapper.map(clienteRequest, Cliente.class);
 		
 		// Invoca logica de negocio
-		ClienteService insertClient = new ClienteService();
-		return insertClient.createClient(client);
+		ClienteService clienteNegocio = new ClienteService();
+		return clienteNegocio.crearCliente(cliente);
 	}
 	
-	
-	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
-	public List<Cliente> getClient() {
-		
-		AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
-		DynamoDBMapper mapper = new DynamoDBMapper(client);
-		
-		Cliente item = new Cliente();
-		
-		item.setId(UUID.randomUUID().toString());
-		item.setNombre("Julio");
-		item.setApellido("Wong");
-		item.setEdad(28);
-		item.setFechaNacimiento("1991-02-01T05:00:00Z");
-		mapper.save(item);
-		
-		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-
-		List<Cliente> clients =  mapper.scan(Cliente.class, scanExpression);
-		
-		//Map<String, String> dictionary = new HashMap<String, String>();
-		// dictionary.put("key", "value");
-		
-		return clients; 
-		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		// Date yourDate = sdf.parse("1992-07-26");
-		// return new Cliente("Julio", "Wong", 28, yourDate);
-	}	
+	@RequestMapping(value = "/listclientes", method = RequestMethod.GET)
+	public List<Cliente> getClient() throws Exception {
+		ClienteService clienteNegocio = new ClienteService();
+		return clienteNegocio.listar();
+	}
 }
