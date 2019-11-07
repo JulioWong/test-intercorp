@@ -12,6 +12,8 @@ public class ClienteService extends DAOClienteImpl{
 	}
 	
 	public List<Cliente> listarClientes() throws Exception {
-		return super.listar();
+		List<Cliente> clientes = super.listar();
+		
+		return clientes;
 	}
 }

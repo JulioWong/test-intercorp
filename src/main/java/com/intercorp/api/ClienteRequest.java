@@ -11,8 +11,8 @@ public class ClienteRequest {
 	private String nombre;
 	private String apellido;
 	
-	@Pattern(regexp="[0-9]+", message="La edad sólo puede tener números")
-	private String edad;
+//	@Pattern(regexp="[0-9]+", message="La edad sólo puede tener números")
+//	private String edad;
 	
 	@Pattern(regexp="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))", message="Fecha con formato incorrecto YYYY-MM-DD")
 	private String fechaNacimiento;
@@ -33,13 +33,13 @@ public class ClienteRequest {
 		this.apellido = apellido;
 	}
 	
-	public String getEdad() {
-		return edad;
-	}
-	
-	public void setEdad(String edad) {
-		this.edad = edad;
-	}
+//	public String getEdad() {
+//		return edad;
+//	}
+//	
+//	public void setEdad(String edad) {
+//		this.edad = edad;
+//	}
 	
 	public String getFechaNacimiento() {
 		return fechaNacimiento;

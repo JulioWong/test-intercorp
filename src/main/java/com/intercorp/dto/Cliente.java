@@ -12,7 +12,7 @@ public class Cliente {
 	private String apellido;
 	private int edad;
 	private String fechaNacimiento;
-	
+	private String fechaMuerte;
 	
 	public Cliente() {
 		// this.id = UUID.randomUUID().toString();
@@ -62,7 +62,14 @@ public class Cliente {
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	
-	
+
+	@DynamoDBAttribute(attributeName="deathDate")
+	public String getFechaMuerte() {
+		return fechaMuerte;
+	}
+
+	public void setFechaMuerte(String fechaMuerte) {
+		this.fechaMuerte = fechaMuerte;
+	}
 
 }
