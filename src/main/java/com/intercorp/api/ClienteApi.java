@@ -1,5 +1,6 @@
 package com.intercorp.api;
 
+import com.intercorp.dao.DAOClienteImpl;
 import com.intercorp.dto.Cliente;
 
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,15 @@ import io.swagger.annotations.Api;
 @Api(value="Employee Management System", description="Operations pertaining to employee in Employee Management System")
 public class ClienteApi {
 
+	@RequestMapping(value="/cliente", method=RequestMethod.POST)
+	public String updateOrSave(@RequestBody Cliente cRequest) throws Exception{  
+		// Invoca l[ogica de negocio
+		DAOClienteImpl insertClient = new DAOClienteImpl();
+		insertClient.registrar(cRequest);
+	    
+	    return "Bien";
+	}
+	
 	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
 	public List<Cliente> getClient() {
 		
