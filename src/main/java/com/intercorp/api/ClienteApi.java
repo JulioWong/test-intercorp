@@ -3,6 +3,8 @@ package com.intercorp.api;
 import com.intercorp.service.ClienteService;
 import com.intercorp.dto.Cliente;
 import java.util.List;
+import java.util.Map;
+
 import javax.validation.Valid;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 
 @RestController
-@Api(value="Employee Management System", description="Operations pertaining to employee in Employee Management System")
+@Api(value="Demo cliente - Intercorp Retail", description="Crear, listar y KPIs de clientes")
 public class ClienteApi {
 	
 	// Inyecta mapper de Dozer
@@ -38,10 +40,15 @@ public class ClienteApi {
 		return clienteNegocio.listar();
 	}
 	
+	@RequestMapping(value = "/kpideclientes", method = RequestMethod.GET)
+	public Map<String, String> getKpis() throws Exception {
+		ClienteService clienteNegocio = new ClienteService();
+		return clienteNegocio.getKpis();
+	}	
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String getTest(@RequestParam(value = "name", defaultValue = "julio") String name_test) throws Exception {
-		String template = "Hello, %s!";
-		return String.format(template, name_test);
-	}
+//	@RequestMapping(value = "/test", method = RequestMethod.GET)
+//	public String getTest(@RequestParam(value = "name", defaultValue = "julio") String name_test) throws Exception {
+//		String template = "Hello actualice, %s!";
+//		return String.format(template, name_test);
+//	}
 }
